@@ -6,3 +6,8 @@ S.B-3-DependencyInjection-Java-config-annotation/.mvn/wrapper/maven-wrapper.prop
 S.B-3-DependencyInjection-Java-config-annotation/src/test/java/com/java/config/ApplicationTests.java
 S.B-3-DependencyInjection-Java-config-annotation/.mvn/wrapper/maven-wrapper.jar
 .vscode/settings.json
+BootProj04-RealTimeDI-AutoConfiguration/mvnw
+BootProj04-RealTimeDI-AutoConfiguration/.mvn/wrapper/maven-wrapper.jar
+BootProj04-RealTimeDI-AutoConfiguration/.mvn/wrapper/maven-wrapper.properties
+BootProj04-RealTimeDI-AutoConfiguration/src/test/java/com/example/realtimedi/BootProj04RealTimeDiAutoConfigurationApplicationTests.java
+BootProj04-RealTimeDI-AutoConfiguration/.mvn/wrapper/maven-wrapper.jar
