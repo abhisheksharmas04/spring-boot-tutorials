@@ -1,0 +1,25 @@
+-> how autoconfiguration is taking place on multiple spring beans? like hikari datasource or other data source JDBC template and etc..
+    When SpringApplication.run() method is call from main class cum configuration class multiple things will happen.. one operation is autoconfiguration of spring beans based on the starters or jar that are added to class path. This autoconfiguration take place as shown below:
+        (1) IOC container searchers for all the jar file added in the class path for spring.factory file and finds in multiple jar file-> in those multiple spring.factory files it looks for key "org.springframework.boot.autoconfigure.EnableAutoConfiguration" and finds in spring.factory file of spring-boot-autoconfiguration-<version>.jar and collects all the values added to that key which are multiple readymate configuration classes.
+
+    Short-ANS: IOC Container searches for spring.factory files in all jar file added to class-path gets different configuration(@configuration)classes againts the key.
+    org.springframework.boot.autoconfigure.EnableAutoConfiguration and execute all the @Beans method in those configuration classes to make java classes of currently added starters jar files as spring beans.
+
+    NOTE:: By default every spring boot application of 2.5 version try to perform autoconfiguration on all the beans (@Beans method) that are there in 131 readymate configuration classes.
+
+    --> How can spring 2.x app work with Apache Dbcp2 datasource?
+        Step1: exclude HikariCP jar file from list of dependent jar files(transitive dependents) thats come from spring-boot-starters-jdbc
+        EG:<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jdbc</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>com.zaxxer</groupId>
+					<artifactId>HikariCP</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+        -> TO add using eclipse: go to dependency hierachy tab --> right click HikariCP<ver>.jar exclude marven artifactId.
+
+        Step2: add apache DBCP2 jar files in pom.xml
+        step 3 run the application
