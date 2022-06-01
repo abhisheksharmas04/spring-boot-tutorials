@@ -1,0 +1,44 @@
+-> Java bean is a java class that is developed by following standard. Java beans is always used to helper class to carry and pass multiple values among the main classes of the same project or different java projects.
+    -> standards:
+        1. class must be public.
+        2. recomended to implements serializable.
+        3. All member varibales must be private and non-static.
+        4. Every bean properties must have setter and getter method
+        5. Must have zero-param constructor directly or indirectly.
+-> Based on data we store there 3 types of java beans:
+    1. VO class (Value Object class.):: the java bean class object that hold either input or output(generally as String properties)
+    2. DTO class(Data Transfer object class):: The java beans that holds shipable data either within the java project or accross the multiple java projects.
+    3. BO class(Business Object Class/Entity Class/Model class/ Persistance class):: The java bean class object that holds persistable data(to be inserted to database table as record) or Persistent Data(Collected from db table records) is called BO class class. 
+-> generally we take this class one per db table having compibility between java bean class properties and db table cols.
+-> If we take support of VO class, DTO class, BO class data accross the multiple layer of a project either for sending inputs or for retrieving  ouptus we will haveing freedom to increase/decreased inputs outputs in each layer.
+
+-> NOTE:: We cannot copy the records of ResultSet to list collection directly becoz each record of RS contains multiple values(in facts multiple simple values) but each element of list can hold only one object.
+-> To overcome this problem copy records from RS to obj of BO class and placed that object in ArrayList collection.
+
+Sample code in DAO class:
+    PreparedStatement st = con.preapreStatement(select EMPNO, EMNAME,EADRR,ESAL from empp);
+    List<Employee>employeeList = new ArrayList();
+    Employee edbo = null;
+    while(rs.next()){
+        ebo = new Employee();
+        ebo.setEmpNo(rs.getInt(1));
+        ebo.setEmpName(rs.getString(2));
+        ebo.setEadd(rs.getString(3));
+        ebo.setSal(rs.getfloat(4));
+        employeeList.add(ebo);
+    }
+Sample BO class
+public class Employee{
+        private int empno,
+        private String empname;
+        private String eadd;
+        private float esal;
+        // Setter and getter methods for every property
+}
+
+-> If we add spring-boot-JDBC-starters to spring boot project as dependency we get the following spring beans through autoconfiguration:
+    -> DataSource Object(HikariDataSource Object)
+    -> JDBC Template Object
+    -> Named Parameter JDBC Template Objects
+    -> DriverManagerDataSoruce Object
+    -> and etc..

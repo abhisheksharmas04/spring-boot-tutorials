@@ -1,0 +1,8 @@
+-> While developing the standalone layerd application the DAO,Service,Controller classes should not handle and catch the exceptions rather they should propagte the exceptions using throw, throws keyword
+
+-> Where as the client application should catch and handle the exception to display non technical error msgs to users.
+
+-> While developing spring web mvc or spring boot layerd web application the DAO, Service layers or classes should not just catch and handle the exception rather they should propagate the exception using throw, throws keyword. Where as controller/hanlder classes should have special logic in handler methods to delegate the controll to error pages to display error msgs as the non technical guiding msg.
+
+-> How do you propogate the exception raised in DAO class to client applications in standalone applications or DAO class to servlet components/JSP/Browers components in web applications?
+    ans refer the above statements.
