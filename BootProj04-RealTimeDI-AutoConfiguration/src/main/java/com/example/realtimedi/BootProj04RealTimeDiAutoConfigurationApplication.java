@@ -8,10 +8,14 @@ import com.example.realtimedi.vo.EmployeeVo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.jdbc.core.JdbcTemplate;
 
-@SpringBootApplication
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class,
+		JdbcTemplateAutoConfiguration.class}) /*To exclude the AutoConfiguration*/
 public class BootProj04RealTimeDiAutoConfigurationApplication {
 
 	public static void main(String[] args) {
