@@ -1,0 +1,42 @@
+-> Spring boot-starter-partent
+    --> The maven pom.xml of spring boot project contains multiple details:
+        (1) partent starter/project details
+        (2) current project details
+        (3) properties overrriding parent project details
+        (4)dependenies (this is for main jar)
+        (5) dependency management (this is for child jars)
+        (6) maven build plugins
+
+-> spring-boot-starter-partent
+    --> it is a ready mate spring boot project/starter that is placed in maven centeral repository having multiple common thing required from the every new spring boot project created by the progrmammer. It is used to reduce burden on the progrmammer. it is useful to reudce the burden on the programmer towards configurating common things.
+    --> Spring boot starter takes care of the following things:
+        (1) Depedency Version(Jar version) based on spirng boot properties: when we select spring boot starter while creating spring boot project using any ide we get those starter info in dependencies tag of pom.xml but we get them without version because there version is decided based on spring boot starter parent version. This help to add the jar having balance and compitaility towrads there versions.EG:       
+            <parent>
+		        <groupId>org.springframework.boot</groupId>
+		        <artifactId>spring-boot-starter-parent</artifactId>
+		        <version>2.7.0</version>
+		        <relativePath /> <!-- lookup parent from repository -->
+	        </parent>            
+            <dependencies>
+                <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-data-jdbc</artifactId>
+                </dependency>
+            </dependencies>
+        --> In order to change versions of transative dependencies(Child jar files) that given by various spring boot starters we can use <dependency> management tag as shown below:
+            <dependencyManagement>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.springframework</groupId>
+                        <artifactId>spring-web</artifactId>
+                        <version>5.3.20</version>
+                    </dependency>
+                </dependencies>
+            </dependencyManagement>
+        
+        (2) Common properties: Spring-boot-start-parent pom.xml is given multiple common properties like java version source encoding and etc. If we want to override this properties or if we want to add new properties then we can use <properties> section of our project pom.xml. EG:
+            <properties>
+		        <java.version>1.8</java.version>
+	        </properties>
+
+        (3) maven build plugins: Actully to run spring boot project in maven and to pack spring boot app into war/jar files we need to generate some reports we need multiple maven plugins like maven-surefire-plugin, maven-site-plugin and etc.. but we don't add them in our projects pom.xml because they are inherited from spring boot starter parent project.

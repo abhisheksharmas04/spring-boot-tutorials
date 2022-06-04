@@ -1,0 +1,37 @@
+@Value:
+    -> It is spring supplied data annotataion. It is given for 3 operation:
+        (1) to inject hard coded value to spirng bean property.
+            EG: 
+            @Component
+            public class DBOperation{
+                @Value("System")
+                private String user;
+            } 
+        (2) To inject value gathered from properties files 
+            application.properties
+            ----------------------
+            db.user=system
+
+            @Component
+            public class DBOperation{
+                @Value("${db.user=system}") --> We should mention key of the properties file.
+                private String user;
+            }
+        (3) To write SPELL(Spring Expression Language) expression perfoming arthemetic and logical operation towards injecting values. EG:
+            @Component
+            public class ItemInfo{
+                @Value(100)
+                private float idlyPrice
+                @Value(200)
+                private flaot dosaPrice
+            }
+            @Component
+            public class BillGeneration{
+                @Value(#{ItemInfo.idlyPrice + ItemInfo.dosaPrice}) --> "#" Symbol means SPEL
+                private float total;
+            }
+    -> To configure user-define properties file we can use @propertiesSource(-) annotataion. We can add only pre-define or user-define or both properties in application.properties file.
+
+    -> The value collected from properties/yml file, system properties and evn. variables like PATH first injected into the IOC container created into internal envrionment object as key value pair and later will be injected to specified bean properties based key name matching in @Value annotataion.
+
+    NOTE:: user-define properties file data/values will be override the data/value of appliation.properties if both properties files are having same keys with different values.
