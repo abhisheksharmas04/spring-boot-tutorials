@@ -1,0 +1,32 @@
+# using YML file
+
+emp:
+  info:
+     #simple prop
+     name: raja
+     id: 1001
+     #array props
+     nikNames:
+      -kanna
+      -chinna
+      -munna
+      #list props
+     teamMembers:
+       -ravi
+       -rajesh
+       -ravi
+       #Set props
+     phoneNumbers:
+       -999999999
+       -888888888
+       -777777777
+       #Map props
+     idDetails:
+       adharNo:564536272653
+       panNo:AJX2312349
+       voterId:123456
+       #hash props
+     companyDetails:
+       title:infoysis Tech
+       location:jpr
+       size:300
