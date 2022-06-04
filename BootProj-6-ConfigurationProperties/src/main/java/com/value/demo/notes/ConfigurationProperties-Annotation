@@ -1,0 +1,73 @@
+Session-19:
+    ----------
+
+    -> We can pass input values to spring bean properties from different places like DB S/w, html or JSP forms, properties/yml file and etc.
+    -> By default every boot app contain 3 files in the setup given by sts plugin as part of starter project.
+            (a) main() class / configuration and client class / starter class (class with @SpringBootApplication)
+            (b) application.properties/yml file (src/main/resources folder)
+            (c) pom.xml or build.gradle (build file to have build configuration)
+            NOTE:: Also gives lots of dependencies (jar file) as maven libraries.
+    
+    -> We need not configure application.properties/yml file using @propertiesSource becoze it is a part of spring boot application echo system(SpringBootApplication.run method internally created and recgonize as part of application start up activities)
+    
+    -> Any other user define propertes file placed in any location must be configure using @propertiesSource annotataion.
+
+    Q.-> Can we change name and location of appliation.propertes/yml file?
+    Ans-> yes we can change but it must be configured explicitly
+
+    -> In application.properties/yml file 99% we work with readymate/predefine keys. Very realy we place user defined keys.
+
+    -> appliation/yml basically contains datasource configuration, Spring boot banner configuration, Spring boot logging configuration and etc..
+
+    -> We can find predifine properties from : https://docs.spring.io/spring-boot/docs/current/reference/html/application-properties.html#application-properties.core.debug
+
+    -> If we change the name or location or extension of application.properties/yml file then it must be configure explicitly using @PropertiesSource annotataion.
+    
+    -> If the key placed in placedholder($...) of @Value annotataion is not matching with the keys available in all the configured properties/yml files through environment object then we get IllegalArgumentException.
+
+    -> We can inject values from spring bean properties from properties/yml files we can use two types of annotataions:
+            (1) @Value: given by spring and can be used in spring boot. To inject each key value to each bean properties sperately. It does not support bulk injection. To inject 20 values of properties of yml file we need to use 20 time @Value.
+
+            (2) @ConfigurationProperties: given by spring boot and cannot be used in spring applications. It supports bulk injection(i.e. we need to write @ConfigurationProperties only 1 time on the top of the spring bean class). all the keys in properties file must have same prefix and spring property name must be there in keys as last word(matching with each other). Taking common prefix word for the kyes of properties file or yml file is mandatory.
+            EG: application.properties
+                ---------------------
+                    example.properties = abhishek
+                    example.val = It
+                    example.loc = aj
+                class
+                ------
+                @ConfigurationProperties(prefix="example")
+                //getter setter method is required.
+                public class Comp{
+                    private String properties;
+                    private String val;
+                    private String loc;
+
+                    // to string
+                }
+    -> what is the difference between @Value and @ConfigurationProperties annotation?
+        @Value: 
+            (1) Given by spring framework so we can use in both spring and spring boot applications.
+            (2) Supports single value injection
+            (3) Supports bulk injection to spring bean properties
+            (4) Can perform field level injection no getter setter required.
+            (5) Supports SPEL expression while injection the values.
+            (6) common prefix for configuration properties is not required.
+            (7) Keys in properties file and bean properties need not to match
+            (8) This is field level annotataion.
+            (9) if fields does not match throw IllegalArgumentException
+        
+        @ConfigurationProperties:
+            (1) Given by spring boot framework so can be used only in spring boot app
+            (2) support bulk injection to spring bean properties
+            (3) perform setter injection internally so getter and setter is required.
+            (4) does not support SPEL
+            (5) common prefix for configuration properties is required.
+            (6) Spring bean properties name and last word in keys(after matching the prefix) must be matched otherwise injection on that spring bean is ignored.
+            (7) this is class level or method level annotation.
+            (8) if matching field does not match injection will be ignored
+        
+        -> Both @Value and @ConfigurationProperties annotaion inject values through Environment variable.
+
+    Q-> If we try to inject two different values to same spring bean properties using both @Value and @ConfigurationProperties annotaion?
+    Ans -> Since @ConfigurationProperties perform setter injection so it override the filed level injection done by @Value annotaion.
