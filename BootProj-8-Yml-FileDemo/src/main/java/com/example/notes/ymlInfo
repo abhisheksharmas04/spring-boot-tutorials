@@ -1,0 +1,34 @@
+YML/YAML:
+	-> Yet another Markup Language.
+	-> YAMLing Language
+	-> Yaint Markup Language
+	-> The file can have either .yml or yaml extension.
+	
+	-> The biggest limitation of properties file is the node level will be repeated in multiple keys.. especially while working with common prefix.
+
+	-> As of now only spring boot is supporting yml spring is not supporting yml.
+
+	-> application.properties
+	-------------------------
+		emp.info.name=raja
+		emp.info.id=1001
+		emp.info.location=jpr
+	-> application.yml:
+	----------------------
+		emp:
+		   info:
+		      name: raja
+			  id: 1001
+			  location: jpr
+	-> Spring boot application internally convert every yml content to properties content before it uses it.
+	-> To convert yml content to properties content and to parse, process yml documents spring boot internally uses snakeyml api.
+
+	-> While writing yml file "." should be replace with:
+		(1) same nodes/level in the kye should not be repreated.
+		(2) replace "." of each node/level with semicolon(;) and write new node in the next line having proper indentation.
+		(3) replace "=" with ":" before placing value
+		(4) to place arraylist/list/set elememnts use "-" symbol
+		(5) take map collections keys and has a properties sub keys as the new nodes.
+    
+    -> Q-> If we place both properties and yml file haveing same keys and different value can u tell me what happens?
+    -> ans-> The value given application.properties will override the value given in application.yml
